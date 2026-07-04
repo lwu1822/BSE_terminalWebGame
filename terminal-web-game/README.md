@@ -1,32 +1,43 @@
-# React + TypeScript + Vite
+# Terminal Trails
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A browser game that teaches filesystem and terminal fundamentals through a
+simulated shell. There is no backend and no real command execution — the
+"shell" is a pure TypeScript interpreter over an in-memory file tree.
 
-Currently, two official plugins are available:
+Built with **React 19 + TypeScript + Vite 8**. Tests use **Vitest 3**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Architecture
 
-## React Compiler
+Strict separation between a pure engine and the React UI:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- `src/engine/` — filesystem model, path resolution, shell parser, one module
+  per command, simulated `git` and `alias`. Zero React/DOM imports.
+- `src/levels/` — levels are pure data "cartridges" (tree, objectives, hints).
+- `src/ui/` — `Terminal`, `FileTreePanel`, `LevelPanel`, `App`.
+- `src/state/` — `localStorage` progress persistence.
 
-## Expanding the Oxlint configuration
+## Getting started
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```bash
+npm install     # installs deps, including vitest
+npm run dev      # start the dev server (Vite)
+npm run build    # type-check + production build
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Running the tests
+
+The engine and every level's solvability are unit-tested with Vitest.
+
+```bash
+npm test          # run the full suite once
+npm run test:watch # watch mode
+```
+
+What the suite covers:
+
+- `src/engine/path.test.ts` — exhaustive `resolvePath` cases (`.`, `..` at
+  root, mixed `../a/./b`, trailing slashes, `~`, absolute vs relative).
+- `src/engine/fs.test.ts` — filesystem operations (create/move/copy/remove).
+- `src/engine/shell.test.ts` — each command's happy path and scripted errors.
+- `src/levels/levels.test.ts` — a scripted command sequence solves every
+  level, doubling as a solvability regression guard.

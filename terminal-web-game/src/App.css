@@ -182,3 +182,321 @@
     border-right-color: var(--border);
   }
 }
+
+/* ===================================================================== */
+/* Terminal Trails game layout                                           */
+/* ===================================================================== */
+
+.app {
+  display: grid;
+  grid-template-columns: minmax(300px, 360px) 1fr minmax(240px, 320px);
+  gap: 1px;
+  background: var(--border);
+  height: 100svh;
+  text-align: left;
+}
+
+.app-left,
+.app-center,
+.app-right {
+  background: var(--bg);
+  overflow: auto;
+  min-height: 0;
+}
+
+.panel-title {
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text);
+  margin: 0 0 10px;
+}
+
+/* ---- Level panel ---- */
+.level-panel {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.level-eyebrow {
+  font-size: 12px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge {
+  background: var(--accent-bg);
+  color: var(--accent);
+  border: 1px solid var(--accent-border);
+  border-radius: 999px;
+  padding: 1px 8px;
+  font-size: 10px;
+}
+
+.level-title {
+  font-size: 26px;
+  letter-spacing: -0.5px;
+  margin: 4px 0 0;
+}
+
+.progress-bar {
+  height: 6px;
+  background: var(--code-bg);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--accent);
+  transition: width 0.4s ease;
+}
+
+.level-briefing {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.briefing-line:empty {
+  height: 4px;
+}
+
+.objective-list,
+.tree-root,
+.tree-children {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.objective {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 6px 0;
+  font-size: 14px;
+  color: var(--text);
+}
+
+.objective-done {
+  color: var(--text-h);
+}
+
+.checkbox {
+  color: var(--text);
+  font-weight: 700;
+}
+
+.objective-done .checkbox {
+  color: #22c55e;
+}
+
+.hint {
+  font-size: 13px;
+  background: var(--code-bg);
+  border-left: 3px solid var(--accent);
+  padding: 8px 10px;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.recap-card {
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 10px;
+  padding: 16px;
+}
+
+.recap-card h2 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.recap-card p {
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.finale {
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.level-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.btn {
+  font: inherit;
+  font-size: 14px;
+  border-radius: 8px;
+  padding: 9px 14px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  filter: brightness(1.1);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.btn-ghost:hover {
+  border-color: var(--accent-border);
+  color: var(--text-h);
+}
+
+.btn-reset {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* ---- Terminal ---- */
+.terminal {
+  height: 100%;
+  background: #0b0d12;
+  color: #d7dce5;
+  font-family: var(--mono);
+  font-size: 14px;
+  cursor: text;
+  display: flex;
+}
+
+.terminal-scroll {
+  padding: 16px;
+  overflow-y: auto;
+  width: 100%;
+  line-height: 1.5;
+}
+
+.term-line {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.term-input {
+  color: #22c55e;
+}
+
+.term-output {
+  color: #d7dce5;
+}
+
+.term-error {
+  color: #f87171;
+}
+
+.term-system {
+  color: #fbbf24;
+  font-style: italic;
+}
+
+.term-input-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.term-prompt {
+  color: #38bdf8;
+  white-space: nowrap;
+}
+
+.term-entry {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #eaeef5;
+  font: inherit;
+  padding: 0;
+}
+
+/* ---- File tree ---- */
+.tree-panel {
+  padding: 20px;
+}
+
+.tree-node {
+  padding: 2px 0;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text);
+}
+
+.tree-children {
+  padding-left: 16px;
+  border-left: 1px dashed var(--border);
+  margin-left: 4px;
+}
+
+.tree-icon {
+  display: inline-block;
+  width: 14px;
+  color: var(--text);
+  opacity: 0.6;
+}
+
+.tree-dir > .tree-name {
+  color: var(--text-h);
+  font-weight: 600;
+}
+
+.tree-cwd > .tree-name {
+  background: var(--accent);
+  color: #fff;
+  border-radius: 4px;
+  padding: 0 6px;
+}
+
+@keyframes flash {
+  0% {
+    background: var(--accent-bg);
+  }
+  100% {
+    background: transparent;
+  }
+}
+
+.tree-flash > .tree-name {
+  animation: flash 1.2s ease-out;
+  border-radius: 4px;
+}
+
+/* ---- Responsive: stack into a single column ---- */
+@media (max-width: 900px) {
+  .app {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 60svh auto;
+    height: auto;
+    min-height: 100svh;
+  }
+  .app-center {
+    min-height: 60svh;
+  }
+}
