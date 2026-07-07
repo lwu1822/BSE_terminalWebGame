@@ -12,6 +12,7 @@ import {
 import { Terminal } from './Terminal'
 import { FileTreePanel } from './FileTreePanel'
 import { LevelPanel } from './LevelPanel'
+import { LevelSelectModal } from './LevelSelectModal'
 import '../App.css'
 
 function initialLines(level: Level): TerminalLine[] {
@@ -46,6 +47,7 @@ export default function App() {
   const [revealedHints, setRevealedHints] = useState(0)
   const [changed, setChanged] = useState<Set<string>>(new Set())
   const [tick, setTick] = useState(0)
+  const [modalOpen, setModalOpen] = useState(false)
 
   // Persist progress whenever it changes.
   useEffect(() => {
@@ -128,12 +130,21 @@ export default function App() {
     }))
   }
 
+  function goToLevel(index: number) {
+    setProgress((p) => ({ ...p, currentLevel: index }))
+  }
+
   function resetAll() {
     resetProgress()
     setProgress(defaultProgress())
   }
 
   const hasNext = levelIndex < LEVELS.length - 1
+  const completedSet = new Set(
+    LEVELS.map((l, i) => (progress.completed.includes(l.id) ? i : -1)).filter(
+      (i) => i >= 0,
+    ),
+  )
 
   return (
     <div className="app">
@@ -150,6 +161,7 @@ export default function App() {
           onNext={goNext}
           onSkip={goNext}
           onReset={resetAll}
+          onOpenLevels={() => setModalOpen(true)}
           hasNext={hasNext}
         />
       </aside>
@@ -171,6 +183,15 @@ export default function App() {
           animationKey={tick}
         />
       </aside>
+
+      {modalOpen && (
+        <LevelSelectModal
+          currentIndex={levelIndex}
+          completedLevels={completedSet}
+          onSelect={goToLevel}
+          onClose={() => setModalOpen(false)}
+        />
+      )}
     </div>
   )
 }

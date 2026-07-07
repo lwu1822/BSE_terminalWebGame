@@ -5,6 +5,8 @@ import { dirExists, fileExists, pathMissing } from './helpers'
 export const level07: Level = {
   id: 'l07',
   title: 'Spring cleaning',
+  concept:
+    "## Moving and renaming with `mv`\n\nThe `mv` command (**m**o**v**e) does two jobs:\n\n- **Rename** a file or folder: `mv old_name.txt new_name.txt` changes the name without moving it.\n- **Move** a file into a different folder: `mv file.txt archive/` places it inside `archive/`.\n\nIt's the same operation under the hood — you're changing the *path* of the item.\n\n## Copying with `cp`\n\nThe `cp` command (**c**o**p**y) creates a duplicate. For files it's straightforward: `cp a.txt b.txt`.\n\nCopying a **directory** is different — a directory might contain many files and subdirectories. The shell refuses to copy a directory unless you add `-r` (**r**ecursive), which tells it to copy the whole tree inside.",
   briefing:
     "This home folder is untidy. Two tools help:\n\n- `mv` moves *or* renames: `mv old.txt new.txt` renames; `mv file.txt dir/` moves it into a folder.\n- `cp` copies. Copying a *directory* needs `-r` (recursive) — try it without and you\'ll get a teaching error.\n\nGoals:\n1. Rename `report_draft.txt` to `report.txt`.\n2. Move `report.txt` into the `archive` folder.\n3. Make a recursive copy of the `templates` folder called `backups`.",
   initialTree: dir('/', [

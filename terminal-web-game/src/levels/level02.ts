@@ -5,6 +5,8 @@ import { cwdIs } from './helpers'
 export const level02: Level = {
   id: 'l02',
   title: 'Moving around',
+  concept:
+    "## What is a path?\n\nA **path** is the address of a file or folder, written as a chain of names separated by slashes. For example, `projects/website/index.html` means: inside `projects`, inside `website`, there's a file called `index.html`.\n\n## Relative paths\n\nA **relative path** is written from *where you are right now*. If you're inside `/home/user` and you type `cd projects`, the shell looks for a folder called `projects` inside your current folder — not somewhere else on the system.\n\nThink of it like giving directions from your current spot: \"turn left, then go straight.\" The same direction words mean different things depending on where you're standing.\n\nThe `cd` command (**c**hange **d**irectory) moves you into a different folder.",
   briefing:
     'Now that you can look around, let\'s move. `cd` (change directory) takes you into a folder.\n\nA *relative* path is relative to where you are now: `cd projects` moves into the `projects` folder inside the current directory. Look before you leap — use `ls` to see what you can enter.\n\nGoal: get inside the `projects/website` folder.',
   initialTree: dir('/', [

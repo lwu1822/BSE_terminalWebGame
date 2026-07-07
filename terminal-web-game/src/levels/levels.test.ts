@@ -54,9 +54,10 @@ describe('every level is solvable', () => {
 
 describe('level definitions are well-formed', () => {
   for (const level of LEVELS) {
-    it(`${level.id} has objectives, hints, and a recap`, () => {
+    it(`${level.id} has objectives, hints, a concept, and a recap`, () => {
       expect(level.objectives.length).toBeGreaterThan(0)
       expect(level.hints.length).toBeGreaterThan(0)
+      expect(level.concept.length).toBeGreaterThan(0)
       expect(level.recap.length).toBeGreaterThan(0)
       // Every allowed command should be a real, dispatchable command.
       expect(level.allowedCommands.length).toBeGreaterThan(0)
