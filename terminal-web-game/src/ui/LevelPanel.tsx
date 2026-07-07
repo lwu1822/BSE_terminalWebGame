@@ -38,11 +38,13 @@ export function LevelPanel({
   return (
     <div className="level-panel">
       <div className="level-header">
-        <div className="level-eyebrow">
-          Level {levelIndex + 1} / {totalLevels}
-          {level.advanced && <span className="badge">optional</span>}
+        <div className="level-header-text">
+          <div className="level-eyebrow">
+            Level {levelIndex + 1} / {totalLevels}
+            {level.advanced && <span className="badge">optional</span>}
+          </div>
+          <h1 className="level-title">{level.title}</h1>
         </div>
-        <h1 className="level-title">{level.title}</h1>
         <button type="button" className="btn btn-ghost btn-levels" onClick={onOpenLevels}>
           ☰ Levels
         </button>
