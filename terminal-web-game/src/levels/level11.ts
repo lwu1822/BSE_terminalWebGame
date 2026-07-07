@@ -5,6 +5,8 @@ import { ranCommand } from './helpers'
 export const level11: Level = {
   id: 'l11',
   title: 'Time machine',
+  concept:
+    "## What is version control?\n\n**Version control** is a system that records changes to your files over time. Think of it as a **time machine** — you can look back at any point in your project's history and see exactly what changed.\n\n## Git basics\n\n**Git** is the most popular version control system. The core workflow is a loop:\n\n1. **`git init`** — start tracking a project (creates a hidden `.git` database).\n2. **`git status`** — see what files have changed since your last snapshot.\n3. **`git add <file>`** — *stage* a change (mark it ready to be saved).\n4. **`git commit -m \"message\"`** — save a **snapshot** (a permanent record of the current state).\n5. **`git log`** — view the history of all your snapshots.\n\n## Why it matters\n\nIf you break something, you can go back to a previous commit. If you're working with others, commits show who changed what and when. It's a safety net for your code.",
   briefing:
     "`git` is version control — a time machine for your files. The basic loop:\n\n- `git init` — start tracking this project.\n- `git status` — see what changed.\n- `git add <file>` — stage a change for the next snapshot.\n- `git commit -m \"message\"` — save a snapshot.\n- `git log` — view past snapshots.\n\nGoals: initialize a repo, stage `app.js`, commit it with a message, then view the log.\n\n(This level is optional — you can skip it.)",
   advanced: true,

@@ -1,4 +1,5 @@
 import type { Level } from '../levels'
+import { Markdown } from './Markdown'
 
 interface LevelPanelProps {
   level: Level
@@ -12,6 +13,7 @@ interface LevelPanelProps {
   onNext: () => void
   onSkip: () => void
   onReset: () => void
+  onOpenLevels: () => void
   hasNext: boolean
 }
 
@@ -27,6 +29,7 @@ export function LevelPanel({
   onNext,
   onSkip,
   onReset,
+  onOpenLevels,
   hasNext,
 }: LevelPanelProps) {
   const progressPct = Math.round((completedCount / totalLevels) * 100)
@@ -35,24 +38,21 @@ export function LevelPanel({
   return (
     <div className="level-panel">
       <div className="level-header">
-        <div className="level-eyebrow">
-          Level {levelIndex + 1} / {totalLevels}
-          {level.advanced && <span className="badge">optional</span>}
+        <div className="level-header-text">
+          <div className="level-eyebrow">
+            Level {levelIndex + 1} / {totalLevels}
+            {level.advanced && <span className="badge">optional</span>}
+          </div>
+          <h1 className="level-title">{level.title}</h1>
         </div>
-        <h1 className="level-title">{level.title}</h1>
+        <button type="button" className="btn btn-ghost btn-levels" onClick={onOpenLevels}>
+          ☰ Levels
+        </button>
       </div>
 
       <div className="progress-bar" aria-label="overall progress">
         <div className="progress-fill" style={{ width: `${progressPct}%` }} />
       </div>
-
-      <p className="level-briefing">
-        {level.briefing.split('\n').map((para, i) => (
-          <span key={i} className="briefing-line">
-            {para}
-          </span>
-        ))}
-      </p>
 
       <div className="objectives">
         <h2 className="panel-title">Objectives</h2>
@@ -69,10 +69,20 @@ export function LevelPanel({
         </ul>
       </div>
 
+      <div className="concept-section">
+        <h2 className="panel-title">Concept</h2>
+        <Markdown>{level.concept}</Markdown>
+      </div>
+
+      <div className="briefing-section">
+        <h2 className="panel-title">Briefing</h2>
+        <Markdown>{level.briefing}</Markdown>
+      </div>
+
       <div className="hints">
         {level.hints.slice(0, revealedHints).map((hint, i) => (
           <div key={i} className="hint">
-            <strong>Hint {i + 1}:</strong> {hint}
+            <strong>Hint {i + 1}:</strong> <Markdown>{hint}</Markdown>
           </div>
         ))}
         {moreHints && !allComplete && (
@@ -85,7 +95,7 @@ export function LevelPanel({
       {allComplete && (
         <div className="recap-card">
           <h2>Nice work!</h2>
-          <p>{level.recap}</p>
+          <Markdown>{level.recap}</Markdown>
           {hasNext ? (
             <button type="button" className="btn btn-primary" onClick={onNext}>
               Next level →

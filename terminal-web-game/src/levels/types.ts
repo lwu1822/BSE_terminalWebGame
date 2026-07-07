@@ -16,7 +16,9 @@ export interface Objective {
 export interface Level {
   id: string
   title: string
-  /** Shown before start; sets story + concept. */
+  /** Beginner-friendly explanation of the core concept (Markdown). */
+  concept: string
+  /** Mission briefing: story + goal (Markdown). */
   briefing: string
   initialTree: DirNode
   initialCwd: string[]
